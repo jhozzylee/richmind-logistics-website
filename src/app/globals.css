@@ -1,26 +1,115 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Colors */
+  --color-neutral: #1F2933;
+  --color-surface: #F8FAFC;
+  --color-surface-shade: #EDF2F7;
+  --color-surface-muted: #64748B;
+  --color-surface-dim: #F5F7FA;
+  --color-brand-blue: #1A3D6C;
+  --color-brand-orange: #FFA500;
+
+  /* Font Family */
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer utilities {
+  /* FLUID TYPOGRAPHY (Scales between mobile and desktop) */
+  
+  .text-h1 {
+    /* Scales from 32px to 56px */
+    font-size: clamp(2rem, 5vw + 1rem, 3.5rem);
+    line-height: 1.15;
+    font-weight: 700;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  .text-h2 {
+    /* Scales from 28px to 36px */
+    font-size: clamp(1.75rem, 3vw + 1rem, 2.25rem);
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  .text-h3 {
+    /* Scales from 20px to 24px */
+    font-size: clamp(1.25rem, 1.5vw + 1rem, 1.5rem);
+    line-height: 1.3;
+    font-weight: 700;
+  }
+
+  .text-h4 {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.4;
+    font-weight: 700;
+  }
+
+  /* STANDARD TEXT (Maintains consistency) */
+
+  .text-reg {
+    font-size: 1rem; /* 16px */
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .text-reg-bold {
+    font-size: 1rem; /* 16px */
+    line-height: 1.5;
+    font-weight: 600;
+  }
+
+  .text-large {
+    /* Slightly larger body text, 18px */
+    font-size: 1.125rem;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .text-small {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  .text-small-bold {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  .text-xsmall {
+    font-size: 0.75rem; /* 12px */
+    line-height: 1.4;
+    font-weight: 300;
+  }
+
+  .btn-text {
+    font-size: 1rem;
+    line-height: 1;
+    font-weight: 500;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* UI Effects */
+.glass-highlight {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.35),
+    rgba(255, 255, 255, 0.05) 60%
+  );
+  pointer-events: none;
+}
+
+.nav-glass-text {
+  @apply text-white mix-blend-difference;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
