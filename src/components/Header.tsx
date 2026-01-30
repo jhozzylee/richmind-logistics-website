@@ -9,6 +9,7 @@ import Button from "@/components/Button";
 export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -16,6 +17,15 @@ export default function Header() {
     { name: "Services", href: "/services" },
     { name: "Track", href: "/track" },
   ];
+
+  // Handle scroll effect for better glass visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -26,19 +36,17 @@ export default function Header() {
   }, [menuOpen]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      {/* Header Bar */}
-      <div className="flex justify-center">
-        <div
-          className="
-            w-full max-w-[1680px]
-            h-16
-            px-[clamp(1.5rem,8vw,11.5rem)]
-            flex items-center justify-between
-            bg-[#385D76]/20
-            backdrop-blur-xl backdrop-saturate-150
-          "
-        >
+    <header 
+      className={`
+        fixed inset-x-0 top-0 z-50 transition-all duration-300
+        bg-[#385D76]/20 backdrop-blur-xl backdrop-saturate-150
+        ${scrolled ? "border-b border-white/10 bg-[#385D76]/30 shadow-lg" : "border-b border-transparent"}
+      `}
+    >
+      {/* Centered Content Container */}
+      <div className="mx-auto max-w-[1680px] w-full px-[clamp(1.5rem,8vw,11.5rem)]">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0">
             <Image
@@ -52,7 +60,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-2 xl:gap-6">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
 
@@ -61,11 +69,11 @@ export default function Header() {
                   key={item.name}
                   href={item.href}
                   className={`
-                    relative px-6 py-2 rounded-full transition-all duration-300
+                    relative px-5 py-2 rounded-full transition-all duration-300 text-sm xl:text-base font-medium
                     ${
                       isActive
                         ? "bg-white/10 border border-white/20 text-white"
-                        : "text-white hover:text-brand-orange"
+                        : "text-white/80 hover:text-white hover:bg-white/5"
                     }
                   `}
                 >
@@ -86,38 +94,17 @@ export default function Header() {
 
           {/* Mobile Hamburger */}
           <button
-            className="lg:hidden text-white"
+            className="lg:hidden text-white p-2 rounded-md hover:bg-white/10 transition-colors"
             onClick={() => setMenuOpen((prev) => !prev)}
             aria-label="Toggle menu"
-            aria-expanded={menuOpen}
           >
             {menuOpen ? (
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             ) : (
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             )}
           </button>
@@ -127,31 +114,31 @@ export default function Header() {
       {/* Mobile Menu */}
       <div
         className={`
-          lg:hidden fixed inset-x-0 top-16 z-40
-          transition-all duration-300
+          lg:hidden absolute top-[100%] left-0 w-full overflow-hidden
+          transition-all duration-300 ease-in-out
           ${
             menuOpen
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 -translate-y-4 pointer-events-none"
+              ? "max-h-screen opacity-100 visible"
+              : "max-h-0 opacity-0 invisible"
           }
         `}
       >
-        <div className="bg-[#385D76]/80 backdrop-blur-xl">
-          <nav className="flex flex-col gap-6 px-6 py-8">
+        <div className="bg-[#385D76]/95 backdrop-blur-2xl border-b border-white/10 shadow-2xl">
+          <nav className="flex flex-col gap-4 px-8 py-10">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className="text-white text-lg font-medium"
+                className="text-white text-xl font-semibold hover:text-brand-orange transition-colors"
               >
                 {item.name}
               </Link>
             ))}
 
             {/* Mobile CTA */}
-            <Link href="/contact" onClick={() => setMenuOpen(false)}>
-              <Button variant="primary" className="w-full mt-4">
+            <Link href="/contact" onClick={() => setMenuOpen(false)} className="mt-4">
+              <Button variant="primary" className="w-full py-4">
                 Get Started
               </Button>
             </Link>
