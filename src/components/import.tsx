@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, ChevronRight, Anchor, ShieldCheck, BarChart3, Truck, Factory } from "lucide-react";
 import Button from "@/components/Button";
+import Link from "next/link";
 
 export default function ImportServicePage() {
   const steps = [
@@ -125,9 +126,12 @@ export default function ImportServicePage() {
             <div className="bg-brand-orange p-10 rounded-[2.5rem] text-white flex flex-col gap-6">
               <h4 className="text-h4 font-bold leading-tight">Ready to streamline your imports?</h4>
               <p className="text-small text-white/80">Speak with an import specialist today for a custom consultation.</p>
+              
+              <Link href="/contact?intent=quote">
               <Button variant="secondary">
                 Request a Quote
               </Button>
+              </Link>
             </div>
           </div>
 

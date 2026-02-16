@@ -11,6 +11,7 @@ import {
   ArrowDownUp 
 } from "lucide-react";
 import Button from "@/components/Button";
+import Link from "next/link";
 
 export default function AirSeaFreightServicePage() {
   const steps = [
@@ -132,9 +133,12 @@ export default function AirSeaFreightServicePage() {
             <div className="bg-brand-orange p-10 rounded-[2.5rem] text-white flex flex-col gap-6">
               <h4 className="text-h4 font-bold leading-tight">Moving high-volume or time-sensitive cargo?</h4>
               <p className="text-small text-white/80">Get a competitive quote for your next international shipment today.</p>
+              
+              <Link href="/contact?intent=quote">
               <Button variant="secondary">
                 Request Freight Quote
               </Button>
+              </Link>
             </div>
           </div>
 

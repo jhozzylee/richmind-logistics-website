@@ -6,12 +6,14 @@ import { motion } from "framer-motion";
 export default function GlobalNetwork() {
   const partners = [
     { src: "/images/Maersk.png", alt: "Maersk" },
-    { src: "/images/Ocean_one.png", alt: "Ocean One" },
-    { src: "/images/MSC.png", alt: "MSC" },
-    { src: "/images/Hapag-Lloyd.png", alt: "Hapag-Lloyd" },
+    { src: "/images/Ocean_one.svg", alt: "Ocean One" },
+    { src: "/images/MSC.svg", alt: "MSC" },
+    { src: "/images/Hapag-Lloyd.svg", alt: "Hapag-Lloyd" },
     // Duplicate for seamless loop
     { src: "/images/Maersk.png", alt: "Maersk" },
-    { src: "/images/Ocean_one.png", alt: "Ocean One" },
+    { src: "/images/Hapag-Lloyd.svg", alt: "Hapag-Lloyd" },
+    { src: "/images/MSC.svg", alt: "MSC" },
+    { src: "/images/Hapag-Lloyd.svg", alt: "Hapag-Lloyd" }
   ];
 
   return (

@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 
 /* Import Transit-specific components */
 import TransitServicePage from "@/components/Transit";
-import OurProcess from "@/components/OurProcess";
 import Testimonials from "@/components/Testemonial";
 import CTA from "@/components/CTA";
 
@@ -43,7 +42,6 @@ export default function TransitPage() {
 
       {/* Page Content */}
       <TransitServicePage />
-      <OurProcess />
       <Testimonials />
       <CTA />
     </div>

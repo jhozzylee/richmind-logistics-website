@@ -46,52 +46,72 @@ export default function Service() {
         {/* ================= SERVICES GRID ================= */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="group relative bg-surface-dim/30 rounded-[2rem] p-8 md:p-10 flex flex-col items-center text-center border border-transparent hover:border-brand-orange/20 hover:bg-white hover:shadow-[0_20px_50px_rgba(0,0,0,0.05)] transition-all duration-500"
+            <Link 
+              key={index} 
+              href={`/services/${toSlug(service.title)}`}
+              className="block outline-none" // ensures the link behaves as a block for the motion div
             >
-              {/* ICON CONTAINER */}
-              <div className="mb-8 relative">
-                <div className="w-20 h-20 rounded-3xl bg-white shadow-sm flex items-center justify-center group-hover:bg-brand-orange group-hover:rotate-6 transition-all duration-500">
-                  <div
-                    className="w-10 h-10 bg-brand-orange group-hover:bg-white transition-colors duration-500"
-                    style={{
-                      maskImage: `url(${service.icon})`,
-                      WebkitMaskImage: `url(${service.icon})`,
-                      maskRepeat: "no-repeat",
-                      maskPosition: "center",
-                      maskSize: "contain",
-                    }}
-                  />
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                style={{ willChange: "transform" }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: index * 0.05,
+                  ease: [0.215, 0.61, 0.355, 1] 
+                }}
+                whileHover={{ 
+                  y: -12,
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
+                className="
+                  group relative bg-surface-dim/30 rounded-[2rem] p-8 md:p-10 
+                  flex flex-col items-center text-center border border-transparent 
+                  hover:border-brand-orange/20 hover:bg-white 
+                  hover:shadow-[0_30px_60px_rgba(0,0,0,0.06)]
+                  transition-shadow transition-colors duration-300
+                  h-full cursor-pointer
+                "
+              >
+                {/* ICON CONTAINER */}
+                <div className="mb-8 relative pointer-events-none">
+                  <div className="w-20 h-20 rounded-3xl bg-white shadow-sm flex items-center justify-center group-hover:bg-brand-orange group-hover:rotate-6 transition-all duration-500">
+                    <div
+                      className="w-10 h-10 bg-brand-orange group-hover:bg-white transition-colors duration-500"
+                      style={{
+                        maskImage: `url(${service.icon})`,
+                        WebkitMaskImage: `url(${service.icon})`,
+                        maskRepeat: "no-repeat",
+                        maskPosition: "center",
+                        maskSize: "contain",
+                      }}
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-brand-orange/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
-                {/* Decorative glow behind icon on hover */}
-                <div className="absolute inset-0 bg-brand-orange/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
 
-              {/* TEXT CONTENT */}
-              <div className="flex flex-col gap-4 mb-8">
-                <h3 className="text-h3 text-neutral group-hover:text-brand-orange transition-colors duration-300">
-                  {service.title}
-                </h3>
-                <p className="text-reg text-surface-muted leading-relaxed line-clamp-4">
-                  {service.text}
-                </p>
-              </div>
+                {/* TEXT CONTENT */}
+                <div className="flex flex-col gap-4 mb-8 pointer-events-none">
+                  <h3 className="text-h3 text-neutral group-hover:text-brand-orange transition-colors duration-300">
+                    {service.title}
+                  </h3>
+                  <p className="text-reg text-surface-muted leading-relaxed line-clamp-4">
+                    {service.text}
+                  </p>
+                </div>
 
-              {/* ACTION BUTTON */}
-              <Link href={`/services/${toSlug(service.title)}`} className="w-full mt-auto">
-                <Button 
-                  variant="secondary" 
-                  className="w-full border-surface-shade group-hover:bg-brand-orange group-hover:text-white group-hover:border-brand-orange transition-all duration-300"
-                >
-                  Explore Service
-                </Button>
-              </Link>
-            </motion.div>
+                {/* ACTION BUTTON (Visual Only now) */}
+                <div className="w-full mt-auto">
+                  <Button 
+                    variant="secondary" 
+                    className="w-full border-surface-shade group-hover:bg-brand-orange group-hover:text-white group-hover:border-brand-orange transition-all duration-300 pointer-events-none"
+                  >
+                    Explore Service
+                  </Button>
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>

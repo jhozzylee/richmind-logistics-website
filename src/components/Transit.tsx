@@ -11,6 +11,7 @@ import {
   Clock 
 } from "lucide-react";
 import Button from "@/components/Button";
+import Link from "next/link";
 
 export default function TransitServicePage() {
   const steps = [
@@ -132,9 +133,12 @@ export default function TransitServicePage() {
             <div className="bg-brand-orange p-10 rounded-[2.5rem] text-white flex flex-col gap-6">
               <h4 className="text-h4 font-bold leading-tight">Need time-critical transit solutions?</h4>
               <p className="text-small text-white/80">Our logistics dispatchers are ready to optimize your route today.</p>
+              
+              <Link href="/contact">
               <Button variant="secondary">
                 Book Transit
               </Button>
+              </Link>
             </div>
           </div>
 

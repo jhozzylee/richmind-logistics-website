@@ -55,20 +55,29 @@ export default function OurValue() {
           {values.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              style={{ willChange: "transform" }}
+              transition={{ 
+                duration: 0.7, 
+                delay: index * 0.1,
+                ease: [0.22, 1, 0.36, 1] // Custom cubic-bezier for a more premium feel
+              }}
+              whileHover={{ 
+                y: -10,
+                transition: { duration: 0.3, ease: "easeOut" }
+              }}
               className="
                 group relative bg-surface-dim/30 rounded-[2rem] p-10
                 flex flex-col items-center text-center gap-8
                 border border-surface-shade/50 hover:border-brand-orange/20
-                transition-all duration-500 hover:bg-white hover:shadow-2xl
+                hover:bg-white hover:shadow-2xl
+                transition-colors transition-shadow duration-300
               "
             >
               {/* ICON CONTAINER */}
-              <div className="relative">
-                {/* Decorative Back Glow */}
+              <div className="relative pointer-events-none">
                 <div className="absolute inset-0 bg-brand-orange blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-full" />
                 
                 <div className="relative w-20 h-20 rounded-2xl bg-white shadow-xl flex items-center justify-center border border-surface-shade group-hover:bg-brand-orange transition-colors duration-500">
@@ -89,8 +98,8 @@ export default function OurValue() {
               </div>
 
               {/* TEXT */}
-              <div className="flex flex-col gap-3">
-                <h3 className="text-h4 font-bold text-neutral group-hover:text-brand-orange transition-colors">
+              <div className="flex flex-col gap-3 pointer-events-none">
+                <h3 className="text-h4 font-bold text-neutral group-hover:text-brand-orange transition-colors duration-300">
                   {service.title}
                 </h3>
                 <p className="text-reg text-surface-muted leading-relaxed">

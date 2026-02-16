@@ -35,7 +35,7 @@ export default function Testimonials() {
       name: "Konate",
       comment: "Reliable service, clear communication, and efficient handling of our cargo. Richmind Logistics has become a dependable logistics partner for us.",
       rating: 4,
-      image: "/images/client3.png",
+      image: "/images/client1.png",
     },
   ];
 

@@ -11,6 +11,7 @@ import {
   History 
 } from "lucide-react";
 import Button from "@/components/Button";
+import Link from "next/link";
 
 export default function CustomsClearanceServicePage() {
   const steps = [
@@ -132,9 +133,12 @@ export default function CustomsClearanceServicePage() {
             <div className="bg-brand-orange p-10 rounded-[2.5rem] text-white flex flex-col gap-6">
               <h4 className="text-h4 font-bold leading-tight">Navigating complex trade regulations?</h4>
               <p className="text-small text-white/80">Our brokerage experts are ready to ensure your goods move without friction.</p>
+              
+              <Link href="/contact?intent=quote">
               <Button variant="secondary">
                 Request Clearance
               </Button>
+              </Link>
             </div>
           </div>
 

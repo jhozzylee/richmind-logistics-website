@@ -11,6 +11,7 @@ import {
   ClipboardCheck 
 } from "lucide-react";
 import Button from "@/components/Button";
+import Link from "next/link";
 
 export default function WarehousingServicePage() {
   const steps = [
@@ -132,9 +133,12 @@ export default function WarehousingServicePage() {
             <div className="bg-brand-orange p-10 rounded-[2.5rem] text-white flex flex-col gap-6">
               <h4 className="text-h4 font-bold leading-tight">Need a smarter way to manage inventory?</h4>
               <p className="text-small text-white/80">Let us help you optimize your storage and fulfillment workflows today.</p>
+              
+              <Link href="/contact">
               <Button variant="secondary">
                 Inquire About Storage
               </Button>
+              </Link>
             </div>
           </div>
 
