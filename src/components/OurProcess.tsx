@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function OurProcess() {
   const steps = [
@@ -16,91 +17,88 @@ export default function OurProcess() {
     },
     {
       title: "Transit & Tracking",
-      description: "Your cargo moves securely via land, sea, or air, while being monitored in real-time throughout the journey.",
+      description: "Your cargo moves securely via land, sea, or air, while being monitored in real-time.",
       image: "/images/Step03.png",
     },
     {
       title: "Final Delivery",
-      description: "Shipments reach their destination safely, on time, and with full confirmation for your peace of mind.",
+      description: "Shipments reach their destination safely, on time, and with full confirmation.",
       image: "/images/Step04.png",
     },
   ];
 
   return (
-    <section className="w-full bg-surface py-16 lg:py-24 overflow-x-hidden">
-      <div className="mx-auto max-w-[1680px] px-[clamp(1.5rem,8vw,11.5rem)]">
-
+    <section className="w-full bg-surface py-24 lg:py-32 overflow-hidden">
+      <div className="mx-auto max-w-[1440px] px-6">
+        
         {/* ================= HEADER ================= */}
-        <div className="flex flex-col items-center text-center gap-6 max-w-[640px] mx-auto">
-          <div className="inline-flex items-center gap-1 border border-brand-orange rounded-full px-3 py-2">
-            <span className="w-3 h-3 rounded-full bg-brand-orange" />
-            <span className="text-large text-brand-orange">Our Process</span>
+        <div className="flex flex-col items-center text-center gap-6 max-w-2xl mx-auto mb-24">
+          <div className="inline-flex items-center gap-3 border border-brand-orange/20 rounded-full px-4 py-2 bg-brand-orange/5">
+             <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-orange"></span>
+            </span>
+            <span className="text-xsmall-bold text-brand-orange uppercase tracking-[0.2em]">Workflow</span>
           </div>
-
-          <h3 className="text-h3 text-neutral">
-            Turning Complex Shipping Into Seamless Logistics
-          </h3>
-
-          <p className="text-reg text-neutral">
-            Our structured approach ensures every shipment moves efficiently,
-            safely, and on time from origin to destination.
-          </p>
+          <h2 className="text-h2 md:text-[3.5rem] text-neutral font-bold leading-none">
+            Our Shipping <span className="text-brand-orange italic">Lifecycle</span>
+          </h2>
         </div>
 
-        {/* ================= STAIRS ================= */}
-        <div className="mt-16 flex flex-col gap-10">
+        {/* ================= VERTICAL ROADMAP ================= */}
+        <div className="relative">
+          {/* THE TRACK (Central Line) */}
+          <div className="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-[2px] bg-dashed-gradient md:-translate-x-1/2 opacity-20" 
+               style={{ backgroundImage: 'linear-gradient(to bottom, #385D76 50%, transparent 50%)', backgroundSize: '2px 20px' }} 
+          />
 
-          {steps.map((step, index) => (
-            <div
-              key={index}
-              /* - justify-center: Centers everything on Mobile AND iPad (up to 1280px)
-                 - xl:justify-end: Switches to the right side ONLY on Large Desktops
-              */
-              className="w-full flex justify-center xl:justify-end"
-              style={{
-                /* transform is 0px by default for Mobile and iPad */
-                transform: `translateX(var(--stair-shift-${index}, 0px))`,
-              } as React.CSSProperties}
-            >
-              {/* Only activate the staircase shift on large desktop screens (1280px+) */}
-              <style jsx>{`
-                @media (min-width: 1280px) {
-                  div {
-                    --stair-shift-${index}: -${index * 18}%;
-                  }
-                }
-              `}</style>
+          <div className="space-y-24">
+            {steps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.7, delay: index * 0.1 }}
+                className={`relative flex flex-col md:flex-row items-center gap-12 ${
+                  index % 2 === 0 ? "md:flex-row-reverse" : ""
+                }`}
+              >
+                {/* STEP INDICATOR (The Dot) */}
+                <div className="absolute left-[20px] md:left-1/2 w-10 h-10 bg-white border-4 border-brand-orange rounded-full md:-translate-x-1/2 z-20 shadow-xl flex items-center justify-center font-bold text-brand-orange text-sm">
+                  {index + 1}
+                </div>
 
-              <div className="max-w-[680px] w-full border-b border-brand-orange">
-                <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-
-                  {/* TEXT */}
-                  <div className="max-w-[400px] text-center md:text-right">
-                    <h3 className="text-h3 text-neutral mb-4">
-                      {step.title}
-                    </h3>
-                    <p className="text-reg text-neutral">
+                {/* CONTENT SIDE */}
+                <div className="flex-1 w-full pl-16 md:pl-0 text-left md:text-right">
+                  <div className={`flex flex-col ${index % 2 === 0 ? "md:items-start" : "md:items-end"}`}>
+                    <h3 className="text-h3 text-neutral mb-3">{step.title}</h3>
+                    <p className="text-reg text-surface-muted max-w-md leading-relaxed">
                       {step.description}
                     </p>
                   </div>
-
-                  {/* IMAGE */}
-                  <div className="w-full max-w-[344px]">
-                    <Image
-                      src={step.image}
-                      alt={step.title}
-                      width={278}
-                      height={224}
-                      className="w-full h-auto object-contain"
-                    />
-                  </div>
-
                 </div>
-              </div>
-            </div>
-          ))}
 
+                {/* IMAGE SIDE */}
+                <div className="flex-1 w-full pl-16 md:pl-0 flex justify-start md:justify-center">
+                   <div className="relative group">
+                      {/* Decorative Background Blob */}
+                      <div className="absolute inset-0 bg-brand-orange/5 rounded-full blur-3xl group-hover:bg-brand-orange/10 transition-colors" />
+                      
+                      <Image
+                        src={step.image}
+                        alt={step.title}
+                        width={320}
+                        height={240}
+                        className="relative z-10 w-full max-w-[320px] h-auto object-contain transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3"
+                      />
+                   </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
+
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 
 export default function Services() {
   const services = [
@@ -37,90 +38,88 @@ export default function Services() {
   ];
 
   return (
-    <section className="w-full bg-surface-shade py-16 lg:py-24">
-      <div
-        className="
-          mx-auto
-          max-w-[1680px]
-          px-[clamp(1.5rem,8vw,11.5rem)]
-        "
-      >
+    <section className="w-full bg-surface-shade py-20 lg:py-32 overflow-hidden">
+      <div className="mx-auto max-w-[1680px] px-[clamp(1.5rem,8vw,11.5rem)]">
+        
         {/* ================= SECTION HEADER ================= */}
-        <div className="flex flex-col items-center text-center gap-6 max-w-[640px] mx-auto">
-          <div className="inline-flex items-center gap-3 border border-brand-orange rounded-full px-4 py-1.5 bg-brand-orange/5">
-            <span className="w-2.5 h-2.5 rounded-full bg-brand-orange animate-pulse" />
-            <span className="text-small-bold text-brand-orange uppercase tracking-wider">
-              Our Services
+        <div className="flex flex-col items-center text-center gap-6 max-w-[700px] mx-auto mb-20">
+          <div className="inline-flex items-center gap-3 border border-brand-orange/30 rounded-full px-4 py-2 bg-brand-orange/5">
+             <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-orange"></span>
+            </span>
+            <span className="text-xsmall-bold text-brand-orange uppercase tracking-[0.2em]">
+              Our Expertise
             </span>
           </div>
 
-          <h2 className="text-h2 text-neutral">
-            Our Logistics Services
+          <h2 className="text-h2 md:text-[3rem] leading-tight text-neutral font-bold">
+            Logistics Services <span className="text-brand-orange font-medium italic">Redefined.</span>
           </h2>
 
-          <p className="text-reg text-neutral max-w-prose">
+          <p className="text-large text-surface-muted max-w-prose">
             Smart, scalable logistics services built to support seamless cargo
             movement worldwide.
           </p>
         </div>
 
         {/* ================= SERVICES GRID ================= */}
-        <div
-          className="
-            mt-14
-            grid
-            grid-cols-1
-            sm:grid-cols-2
-            lg:grid-cols-3
-            gap-6
-            lg:gap-8
-          "
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ y: -8 }}
               className="
-                bg-surface
-                rounded-2xl
-                p-7
-                md:p-8
+                group
+                bg-white
+                rounded-[2.5rem]
+                p-10
                 flex
                 flex-col
-                gap-4
+                gap-6
                 border
-                border-surface-shade
-                shadow-sm
-                hover:shadow-md
-                transition-shadow
+                border-surface-shade/50
+                shadow-[0_4px_20px_rgba(0,0,0,0.03)]
+                hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)]
+                hover:border-brand-orange/10
+                transition-all
+                duration-500
               "
             >
-              {/* ICON */}
-              <div className="w-14 h-14 rounded-full bg-brand-orange flex items-center justify-center">
-                <div
-                  className="w-8 h-8 bg-white"
-                  style={{
-                    maskImage: `url(${service.icon})`,
-                    WebkitMaskImage: `url(${service.icon})`,
-                    maskRepeat: "no-repeat",
-                    WebkitMaskRepeat: "no-repeat",
-                    maskPosition: "center",
-                    WebkitMaskPosition: "center",
-                    maskSize: "contain",
-                    WebkitMaskSize: "contain",
-                  }}
-                />
+              {/* ICON BLOCK */}
+              <div className="relative w-16 h-16">
+                <div className="absolute inset-0 bg-brand-orange rounded-2xl rotate-6 opacity-10 group-hover:rotate-12 group-hover:opacity-20 transition-all duration-500" />
+                <div className="relative w-16 h-16 rounded-2xl bg-brand-orange flex items-center justify-center shadow-lg shadow-brand-orange/20 group-hover:-translate-y-1 transition-transform duration-500">
+                  <div
+                    className="w-8 h-8 bg-white"
+                    style={{
+                      maskImage: `url(${service.icon})`,
+                      WebkitMaskImage: `url(${service.icon})`,
+                      maskRepeat: "no-repeat",
+                      maskPosition: "center",
+                      maskSize: "contain",
+                    }}
+                  />
+                </div>
               </div>
 
-              {/* TEXT */}
-              <div className="flex flex-col gap-2">
-                <h3 className="text-h3 text-neutral">
+              {/* TEXT BLOCK */}
+              <div className="flex flex-col gap-3">
+                <h3 className="text-h3 text-neutral group-hover:text-brand-orange transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-reg text-neutral/70 leading-relaxed">
+                <p className="text-reg text-surface-muted leading-relaxed">
                   {service.text}
                 </p>
               </div>
-            </div>
+
+              {/* DECORATIVE LINE */}
+              <div className="mt-4 w-12 h-1 bg-surface-shade rounded-full group-hover:w-full group-hover:bg-brand-orange/20 transition-all duration-700" />
+            </motion.div>
           ))}
         </div>
       </div>
