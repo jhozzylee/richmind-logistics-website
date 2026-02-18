@@ -48,7 +48,7 @@ export default function Footer() {
               />
             </div>
             <p className="text-large text-white/50 max-w-[280px] leading-relaxed">
-              Moving cargo with global precision and local expertise.
+              Delivering Excellence Every Mile
             </p>
             {/* Newsletter Mini-Signup or Trust Tag could go here */}
             <div className="flex items-center gap-2 text-brand-orange text-xsmall-bold uppercase tracking-widest">
